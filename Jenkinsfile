@@ -28,9 +28,23 @@ pipeline {
 			}
 		}
 		stage("Deploy") {
-			steps {
-				echo "Deploy!"
-			}
-		}
+            steps {
+                script {
+                    echo "Iniciando despliegue en contenedor Docker..."
+
+                    // Construcción de la imagen Docker
+                    sh 'docker build -t my-app:latest .'
+
+                    // Detener cualquier contenedor previo (si existe)
+                    sh 'docker stop my-app-container || true'
+                    sh 'docker rm my-app-container || true'
+
+                    // Ejecutar un nuevo contenedor a partir de la imagen construida
+                    sh 'docker run -d --name my-app-container -p 80:80 my-app:latest'
+
+                    echo "Despliegue completado con éxito en Docker"
+                }
+            }
+        }
 	}
 }
