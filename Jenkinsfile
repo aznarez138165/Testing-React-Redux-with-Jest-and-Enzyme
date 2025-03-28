@@ -10,7 +10,7 @@ pipeline {
 		stage("Build") {
 			steps {
 				echo 'Instalando dependencias...'
-				sh 'sudo npm install --legacy-peer-deps'
+				sh 'npm install --legacy-peer-deps'
 			}
 		}
 		stage("Testing") {
@@ -19,7 +19,7 @@ pipeline {
 					steps {
 						catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
 							echo 'Ejecutando tests unitarios'
-							sh 'sudo npm test -- --watchAll=false --ci --reporters=default --coverage'
+							sh 'npm test -- --watchAll=false --ci --reporters=default --coverage'
 						}
 					}
 				}
