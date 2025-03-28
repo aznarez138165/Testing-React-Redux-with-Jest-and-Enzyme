@@ -1,6 +1,12 @@
 pipeline {
 	agent any
 	stages {
+		stage('Checkout') {
+			steps {
+				echo 'Chequeando el código del repositorio...'
+				git branch: 'master', url: 'https://github.com/aznarez138165/Testing-React-Redux-with-Jest-and-Enzyme'
+			}
+		}
 		stage("Build") {
 			steps {
 				echo 'Instalando dependencias...'
@@ -28,23 +34,16 @@ pipeline {
 			}
 		}
 		stage("Deploy") {
-            steps {
-                script {
-                    echo "Iniciando despliegue en contenedor Docker..."
-
-                    // Construcción de la imagen Docker
-                    sh 'docker build -t my-app:latest .'
-
-                    // Detener cualquier contenedor previo (si existe)
-                    sh 'docker stop my-app-container || true'
-                    sh 'docker rm my-app-container || true'
-
-                    // Ejecutar un nuevo contenedor a partir de la imagen construida
-                    sh 'docker run -d --name my-app-container -p 80:80 my-app:latest'
-
-                    echo "Despliegue completado con éxito en Docker"
-                }
-            }
-        }
+			steps {
+				script {
+					echo "Iniciando despliegue en contenedor Docker..."
+					sh 'docker build -t my-app:latest .'
+					sh 'docker stop my-app-container || true'
+					sh 'docker rm my-app-container || true'
+					sh 'docker run -d --name my-app-container -p 80:80 my-app:latest'
+					echo "Despliegue completado con éxito en Docker"
+				}
+			}
+		}
 	}
 }
