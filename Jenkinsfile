@@ -10,7 +10,7 @@ pipeline {
 		stage("Build") {
 			steps {
 				echo 'Instalando dependencias...'
-				sh 'npm install --legacy-peer-deps'
+				sh 'sudo npm install --legacy-peer-deps'
 			}
 		}
 		stage("Testing") {
@@ -19,7 +19,7 @@ pipeline {
 					steps {
 						catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
 							echo 'Ejecutando tests unitarios'
-							sh 'npm test -- --watchAll=false --ci --reporters=default --coverage'
+							sh 'sudo npm test -- --watchAll=false --ci --reporters=default --coverage'
 						}
 					}
 				}
@@ -39,10 +39,10 @@ pipeline {
 			steps {
 				script {
 					echo "Iniciando despliegue en contenedor Docker..."
-					sh 'docker build -t my-app:latest .'
-					sh 'docker stop my-app-container || true'
-					sh 'docker rm my-app-container || true'
-					sh 'docker run -d --name my-app-container -p 80:80 my-app:latest'
+					sh 'sudo docker build -t my-app:latest .'
+					sh 'sudo docker stop my-app-container || true'
+					sh 'sudo docker rm my-app-container || true'
+					sh 'sudo docker run -d --name my-app-container -p 80:80 my-app:latest'
 					echo "Despliegue completado con éxito en Docker"
 				}
 			}
