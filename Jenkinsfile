@@ -16,7 +16,6 @@ pipeline {
 					}
 				}
 				stage("Functional Tests") {
-					agent { docker 'openjdk:8-jdk-alpine' }
 					steps {
 						echo 'Todavia no hay tests funcionales'
 					}
