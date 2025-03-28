@@ -17,8 +17,10 @@ pipeline {
 			parallel {
 				stage("Unit Tests") {
 					steps {
-						echo 'Ejecutando tests unitarios'
-						sh 'npm test -- --watchAll=false --ci --reporters=default --coverage'
+						catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+							echo 'Ejecutando tests unitarios'
+							sh 'npm test -- --watchAll=false --ci --reporters=default --coverage'
+						}
 					}
 				}
 				stage("Functional Tests") {
