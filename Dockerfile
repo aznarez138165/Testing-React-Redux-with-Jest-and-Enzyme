@@ -1,3 +1,4 @@
+#cambio para probar trigger
 # Usar la imagen base oficial de Node.js
 FROM node:14
 
