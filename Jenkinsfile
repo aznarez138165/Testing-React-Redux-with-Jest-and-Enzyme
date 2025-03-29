@@ -41,6 +41,9 @@ pipeline {
 					sh 'sudo docker rm my-app-container || true'
 					sh 'sudo docker run -d --name my-app-container -p 80:80 my-app:latest'
 					echo "Despliegue completado con éxito en Docker"
+					sh 'sudo docker stop my-app-container || true'
+					sh 'sudo docker rm my-app-container || true'
+					echo "Contenedor eliminado correctamente"
 				}
 			}
 		}
