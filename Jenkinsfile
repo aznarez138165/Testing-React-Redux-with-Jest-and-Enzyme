@@ -1,12 +1,6 @@
 pipeline {
 	agent any
 	stages {
-		stage('Checkout') {
-			steps {
-				echo 'Chequeando el código del repositorio...'
-				git branch: 'master', url: 'https://github.com/aznarez138165/Testing-React-Redux-with-Jest-and-Enzyme'
-			}
-		}
 		stage("Build") {
 			steps {
 				echo 'Instalando dependencias...'
