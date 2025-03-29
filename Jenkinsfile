@@ -1,7 +1,7 @@
 pipeline {
 	agent any
 	triggers {
-		githubPush()
+    		pollSCM('H/15 * * * *')
 	}
 	stages {
 		stage("Build") {
