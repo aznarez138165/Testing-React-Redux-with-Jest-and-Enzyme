@@ -38,12 +38,9 @@ pipeline {
 		stage("Deploy") {
 			steps {
 				script {
-					echo "Iniciando despliegue en contenedor Docker..."
-					sh 'sudo docker build -t my-app:latest .'
-					sh 'sudo docker stop my-app-container || true'
-					sh 'sudo docker rm my-app-container || true'
-					sh 'sudo docker run -d --name my-app-container -p 80:80 my-app:latest'
-					echo "Despliegue completado con éxito en Docker"
+					echo "Iniciando despliegue en contenedor de la asignatura..."
+					sh 'npm start &'
+					echo "Despliegue completado con éxito en el contenedor de la asignatura"
 				}
 			}
 		}
