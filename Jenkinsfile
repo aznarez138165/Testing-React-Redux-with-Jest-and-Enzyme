@@ -33,6 +33,7 @@ pipeline {
 			steps {
 				script {
 					echo "Iniciando despliegue en contenedor de la asignatura..."
+					sh 'pkill -f "npm start" || true'
 					sh 'npm start &'
 					echo "Despliegue completado con éxito en el contenedor de la asignatura"
 				}
