@@ -4,7 +4,7 @@ pipeline {
 		stage("Build") {
 			steps {
 				echo 'Instalando dependencias...'
-				sh 'npm install'
+				sh 'npm install --legacy-peer-deps'
 			}
 		}
 		stage("Testing") {
