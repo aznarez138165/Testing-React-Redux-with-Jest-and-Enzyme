@@ -1,4 +1,4 @@
-## Usar la imagen base oficial de Node.js
+# Usar la imagen base oficial de Node.js
 FROM node:14
 
 # Establecer el directorio de trabajo
